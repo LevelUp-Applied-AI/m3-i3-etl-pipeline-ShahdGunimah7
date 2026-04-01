@@ -3,7 +3,9 @@
 
 ## Overview
 
-<!-- What does this pipeline do? -->
+This ETL pipeline extracts data from a PostgreSQL database, transforms it into customer-level analytics, validates data quality, and loads the results into a new table and CSV file.
+
+The pipeline processes order, product, and customer data to generate insights such as total revenue, average order value, and top product category per customer.
 
 ## Setup
 
@@ -30,12 +32,26 @@ python etl_pipeline.py
 
 ## Output
 
-<!-- What does customer_analytics.csv contain? -->
+The output file `customer_analytics.csv` contains a customer-level summary with the following columns:
+
+- customer_id
+- customer_name
+- city
+- total_orders (number of distinct orders)
+- total_revenue (sum of all order values)
+- avg_order_value (average revenue per order)
+- top_category (category with the highest revenue for the customer)
 
 ## Quality Checks
 
-<!-- What validations are performed and why? -->
+The pipeline includes several data quality checks to ensure reliability:
 
+- No null values in `customer_id` or `customer_name` (ensures valid customer records)
+- `total_revenue > 0` (ensures meaningful revenue data)
+- No duplicate `customer_id` values (ensures uniqueness per customer)
+- `total_orders > 0` (ensures customers have valid transactions)
+
+If any of these checks fail, a ValueError is raised to prevent loading invalid data.
 ---
 
 ## License
