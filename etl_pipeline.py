@@ -62,8 +62,14 @@ def transform(data_dict):
 
     merged["line_total"] = merged["quantity"] * merged["unit_price"]
 
-    customer_base = customers[["customer_id", "customer_name", "city"]]
-    
+    if "customer_name" in customers.columns:
+     customer_base = customers[["customer_id", "customer_name", "city"]]
+    elif "name" in customers.columns:
+     customer_base = customers[["customer_id", "name", "city"]].rename(
+        columns={"name": "customer_name"}
+    )
+    else:
+     raise KeyError("customers DataFrame must contain either 'customer_name' or 'name'")
 
     customer_summary = (
         merged.groupby("customer_id", as_index=False)
