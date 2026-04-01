@@ -62,9 +62,8 @@ def transform(data_dict):
 
     merged["line_total"] = merged["quantity"] * merged["unit_price"]
 
-    customer_base = customers[["customer_id", "name", "city"]].rename(
-        columns={"name": "customer_name"}
-    )
+    customer_base = customers[["customer_id", "customer_name", "city"]]
+    
 
     customer_summary = (
         merged.groupby("customer_id", as_index=False)
