@@ -1,0 +1,19 @@
+{
+  "pipeline_name": "customer_pipeline",
+  "output_table": "customer_summary",
+  "output_csv": "output/customer_analytics.csv",
+  "group_by": ["customer_id"],
+  "metrics": {
+    "total_orders": {
+      "column": "order_id",
+      "agg": "nunique"
+    },
+    "total_revenue": {
+      "column": "line_total",
+      "agg": "sum"
+    }
+  },
+  "entity_columns": ["customer_id", "customer_name", "city"],
+  "top_category": true,
+  "outlier_column": "total_revenue"
+}

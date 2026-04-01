@@ -1,0 +1,21 @@
+{
+  "pipeline_name": "product_pipeline",
+  "output_table": "product_summary",
+  "output_csv": "output/product_analytics.csv",
+  "group_by": ["product_id", "product_name", "category"],
+  "metrics": {
+    "total_orders": {
+      "column": "order_id",
+      "agg": "nunique"
+    },
+    "total_quantity_sold": {
+      "column": "quantity",
+      "agg": "sum"
+    },
+    "total_revenue": {
+      "column": "line_total",
+      "agg": "sum"
+    }
+  },
+  "outlier_column": "total_revenue"
+}

@@ -59,3 +59,22 @@ If any of these checks fail, a ValueError is raised to prevent loading invalid d
 This repository is provided for educational use only. See [LICENSE](LICENSE) for terms.
 
 You may clone and modify this repository for personal learning and practice, and reference code you wrote here in your professional portfolio. Redistribution outside this course is not permitted.
+
+## Incremental ETL vs Full ETL
+
+### Full ETL
+- Processes all data on every run
+- Simpler to implement
+- Slower as data grows
+- Useful for initial load
+
+### Incremental ETL
+- Processes only new data since the last successful run
+- Faster and more efficient
+- Requires tracking metadata (etl_metadata table)
+- More complex to implement
+
+### Observations
+- First run performs full load and processes all records
+- Subsequent runs process only new orders
+- If no new data is available, ETL is skipped
